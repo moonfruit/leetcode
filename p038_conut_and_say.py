@@ -5,6 +5,7 @@ class Solution:
     def __init__(self, init='1'):
         self._list = [init]
 
+    # @return a string
     def countAndSay(self, n):
         while len(self._list) < n:
             self._list.append(self.say(self._list[-1]))
@@ -33,11 +34,7 @@ class Solution:
         return ''.join(ret)
 
 
-def main():
+if __name__ == '__main__':
     solution = Solution()
     print(solution.countAndSay(10))
     print(solution._list)
-
-
-if __name__ == '__main__':
-    main()
