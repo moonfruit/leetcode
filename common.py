@@ -6,6 +6,13 @@ class ListNode:
         self.val = x
         self.next = None
 
+    def print(self):
+        print("----")
+        cur = self
+        while cur:
+            print("%d - %d" % (id(cur), cur.val))
+            cur = cur.next
+
     @staticmethod
     def new(*args):
         head = None
@@ -20,34 +27,12 @@ class ListNode:
 
         return head
 
-    def print(self):
-        print("----")
-        cur = self
-        while cur:
-            print("%d - %d" % (id(cur), cur.val))
-            cur = cur.next
-
 
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
-
-    @staticmethod
-    def new(*args):
-        return TreeNode._new(*args)[0]
-
-    @staticmethod
-    def _new(*args):
-        if not args:
-            return None, args
-        root, args = TreeNode(args[0]), args[1:]
-        if root.val is None:
-            return None, args
-        root.left, args = TreeNode._new(*args)
-        root.right, args = TreeNode._new(*args)
-        return root, args
 
     def _print(self):
         print("%d - %d" % (id(self), self.val))
@@ -63,3 +48,39 @@ class TreeNode:
     def print(self):
         print("----")
         self._print()
+
+    @staticmethod
+    def new(*args):
+        if not args or args[0] is None:
+            return None
+
+        root = None
+        parents = []
+        childs = []
+        for e in args:
+            if not root:
+                root = TreeNode(e)
+                parents.append(root)
+                continue
+
+            if e is not None:
+                e = TreeNode(e)
+
+            childs.append(e)
+
+            if len(childs) >= len(parents) * 2:
+                for p, (x, y) in zip(parents, zip(*[iter(childs)]*2)):
+                    p.left = x
+                    p.right = y
+
+                parents = [e for e in childs if e is not None]
+                childs = []
+
+        if len(childs) > 0:
+            if len(childs) % 2 == 1:
+                childs.append(None)
+            for p, (x, y) in zip(parents, zip(*[iter(childs)]*2)):
+                p.left = x
+                p.right = y
+
+        return root

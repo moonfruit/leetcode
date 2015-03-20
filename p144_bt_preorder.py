@@ -24,6 +24,6 @@ class Solution:
 
 if __name__ == '__main__':
     from common import TreeNode
-    root = TreeNode.new(1, 2, None, None, 3, None, 4, 5)
+    root = TreeNode.new(1, 2, 3, None, None, None, 4, 5)
     root.print()
     print(Solution().preorderTraversal(root))
