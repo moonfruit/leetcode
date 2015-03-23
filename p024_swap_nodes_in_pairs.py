@@ -32,7 +32,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-    from common import ListNode
+    from leetcode import ListNode
     list = ListNode.new(1, 2, 3, 4, 5)
     list.print()
     Solution().swapPairs(list).print()

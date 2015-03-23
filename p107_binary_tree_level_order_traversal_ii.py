@@ -41,5 +41,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    from common import TreeNode
+    from leetcode import TreeNode
     print(Solution().levelOrderBottom(TreeNode.new(3, 9, 20, None, None, 15, 7)))
