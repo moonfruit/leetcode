@@ -20,10 +20,10 @@ class Solution:
         total = []
         for t in self.routes:
             for i, e in enumerate(t):
-                if len(total) <= i:
-                    total.append(e)
-                else:
+                try:
                     total[i] += e
+                except:
+                    total.append(e)
 
         return sum([e * 10 ** i for i, e in enumerate(total)])
 
