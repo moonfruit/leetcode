@@ -19,7 +19,7 @@ class Solution:
                         return i + 1, j + 1
 
 
-    # 多次一举...
+    # 多此一举...
     def twoSum2(self, num, target):
         num1 = [e for e in enumerate(num) if e[1] % 2 == 0]
         num2 = [e for e in enumerate(num) if e[1] % 2 != 0]
