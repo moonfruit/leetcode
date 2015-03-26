@@ -4,11 +4,10 @@
 class Solution:
     # @return an integer
     def atoi(self, str):
-        from collections import deque
-
         first = True
         sign = 1
-        numbers = deque()
+        sum = 0
+        overflow = 0
         for c in str.lstrip():
             if first:
                 first = False
@@ -19,20 +18,33 @@ class Solution:
                     continue
 
             if '0' <= c <= '9':
-                numbers.appendleft(ord(c) - ord('0'))
+                cur = ord(c) - ord('0')
+                if overflow > 1:
+                    return 2147483647 if sign == 1 else -2147483648
+
+                elif overflow > 0:
+                    if cur < 8:
+                        overflow = 2
+                    elif cur == 8:
+                        if sign == 1:
+                            return 2147483647
+                        else:
+                            overflow = 2
+                    else:
+                        return 2147483647 if sign == 1 else -2147483648
+
+                sum = sum * 10 + cur
+                if sum > 214748364:
+                    overflow = 2
+                elif sum == 214748364:
+                    overflow = 1
             else:
                 break
 
-        ret = sum([e * 10 ** i for i, e in enumerate(numbers)]) * sign
-
-        if ret > 2147483647:
-            ret = 2147483647
-        elif ret < -2147483648:
-            ret = -2147483648
-
-        return ret
+        return sum * sign
 
 
 if __name__ == '__main__':
+    print(Solution().atoi(''))
     print(Solution().atoi('  -123abc'))
     print(Solution().atoi('2147483648'))
