@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- utf-8 -*-
 
-class ListNode:
+class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
+        self.random = None
 
     def print(self):
         print("----")
@@ -28,7 +29,37 @@ class ListNode:
         return head
 
 
-class TreeNode:
+class RandomListNode(ListNode):
+    def __init__(self, x, random=None):
+        super().__init__(x)
+        self.random = random
+
+    def print(self):
+        print("----")
+        cur = self
+        while cur:
+            print("%d - %d - %d" % (id(cur), cur.val, id(cur.random)))
+            cur = cur.next
+
+    @staticmethod
+    def new(*args):
+        from random import choice
+        head = None
+        last = None
+        all = []
+        for e in args:
+            node = RandomListNode(e, choice(all) if all else None)
+            all.append(node)
+            if head is None:
+                head = node
+            if last is not None:
+                last.next = node
+            last = node
+
+        return head
+
+
+class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
