@@ -12,7 +12,6 @@ class Solution:
         for i in range(l):
             nums[i] = copy[(k + i) % l]
 
-
     def rotate2(self, nums, k):
         if not nums:
             return
