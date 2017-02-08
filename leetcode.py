@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- utf-8 -*-
 
+
 class ListNode(object):
     def __init__(self, x):
         self.val = x
@@ -46,10 +47,10 @@ class RandomListNode(ListNode):
         from random import choice
         head = None
         last = None
-        all = []
+        elements = []
         for e in args:
-            node = RandomListNode(e, choice(all) if all else None)
-            all.append(node)
+            node = RandomListNode(e, choice(elements) if elements else None)
+            elements.append(node)
             if head is None:
                 head = node
             if last is not None:
